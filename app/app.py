@@ -82,19 +82,15 @@ content = html.Div(
                                             type="text",
                                             placeholder="QR Code Text",
                                             id="text-input",
+                                            autofocus=True,
                                         ),
                                         dbc.Tooltip(
                                             "Text that will be encoded in the QR Code.",
                                             target="text-input",
                                         ),
                                         html.Br(),
-                                        dbc.Spinner(
-                                            html.Div("", id="loading-state"),
-                                            type="grow",
-                                            size="sm",
-                                            id="loading-output",
-                                        ),
                                     ],
+                                    style={"width": "600px"},
                                 ),
                                 dbc.Col(
                                     [
@@ -149,8 +145,14 @@ content = html.Div(
             style={"padding": "15px", "padding-bottom": "40px", "padding-top": "40px"},
         ),
         html.Div(
-            [],
-            id="qrcode-output",
+            dbc.Spinner(
+                [],
+                type="grow",
+                color="primary",
+                size="lg",
+                id="loading",
+            ),
+            style={"padding": "15px", "padding-bottom": "40px", "padding-top": "40px"},
         ),
     ],
     className="content",
@@ -281,8 +283,7 @@ def on_submit_input_button_n_clicks(
 
 @callback(
     [
-        Output("loading-output", "children"),
-        Output("qrcode-output", "children"),
+        Output("loading", "children"),
         Output("qrcode-storage-main", "data"),
     ],
     [
@@ -374,12 +375,22 @@ def update_qrcode(
     # paste logo in QR code
     # img.paste(logo, pos)
     # save img to a file
+    output = (html.Img(src=qrcode_output.get_image()),)
 
     return [
-        html.Div("", id="loading-state"),
-        html.Img(src=qrcode_output.get_image()),
+        output,
         storage_main_data,
     ]
+
+
+# @callback(
+#     Output("fade", "is_in"),
+#     Input("text-input", "value"),
+# )
+# def hide_qrcode(value):
+#     print("why")
+#     if value is not None:
+#         return False
 
 
 if __name__ == "__main__":
