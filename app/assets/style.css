@@ -1,0 +1,38 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 14rem;
+    padding: 1rem 1rem;
+    background-color: var(--bs-body-bg);
+}
+
+
+.content {
+    margin-left: 16rem;
+    margin-right: 2rem;
+    padding: 2rem 1rem;
+}
+
+.infoBox {
+    padding-left: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+.radio-group .form-check {
+    padding-left: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:last-child)>.btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:first-child)>.btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}
