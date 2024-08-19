@@ -6,8 +6,7 @@ A simple [Dash](https://dash.plotly.com/) app to generate QR codes using the [py
 
 ## Getting started
 
-Head to this [demo site](https://32b90066-d4c4-443e-9800-8058274e920d.ka.bw-cloud-instance.org/) for playing around.
-Or start locally:
+Head to this [demo site](https://32b90066-d4c4-443e-9800-8058274e920d.ka.bw-cloud-instance.org/) for playing around or start locally:
 
 1. Clone/ download
 2. `poetry install`
