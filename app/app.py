@@ -151,6 +151,7 @@ content = html.Div(
                 color="primary",
                 size="lg",
                 id="loading",
+                show_initially=False,
             ),
             style={"padding": "15px", "padding-bottom": "40px", "padding-top": "40px"},
         ),
