@@ -29,7 +29,7 @@ background_callback_manager = DiskcacheManager(cache)
 
 
 app = dash.Dash(
-    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME],
+    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP],
     background_callback_manager=background_callback_manager,
 )
 
@@ -49,14 +49,14 @@ sidebar = html.Div(
             [
                 html.Span(
                     [
-                        dbc.Label(className="fa fa-moon", html_for="switch"),
+                        dbc.Label(className="bi bi-moon", html_for="switch"),
                         dbc.Switch(
                             id="switch",
                             value=True,
                             className="d-inline-block ms-1",
                             persistence=True,
                         ),
-                        dbc.Label(className="fa fa-sun", html_for="switch"),
+                        dbc.Label(className="bi bi-sun", html_for="switch"),
                     ],
                     style={"float": "left"},
                 ),
@@ -291,14 +291,49 @@ def on_submit_input_button_n_clicks(
         Input("qrcode-storage-main", "data"),
     ],
     background=True,
-    prevent_initial_call=True,
+    # prevent_initial_call=True,
     cancel=[Input("text-input", "value")],
 )
 def update_qrcode(
     storage_main_data,
 ):
     if storage_main_data is None:
-        return dash.no_update
+        return [
+            (
+                dbc.Toast(
+                    [
+                        html.P(
+                            "Start by typing in the text box above to generate a QR Code.",
+                            className="mb-0",
+                        )
+                    ],
+                    header=[
+                        html.I(className="bi bi-emoji-laughing me-2"),
+                        "Welcome!",
+                    ],
+                ),
+            ),
+            storage_main_data,
+        ]
+    elif storage_main_data["text-input"] == "":
+        return [
+            (
+                dbc.Toast(
+                    [
+                        html.P(
+                            "Did you know that you can also change the color and even gradient of the QR Code with the options above?",
+                            className="mb-0",
+                        )
+                    ],
+                    header=[
+                        html.I(className="bi bi-info-circle me-2"),
+                        "Hey there!",
+                    ],
+                ),
+            ),
+            storage_main_data,
+        ]
+
     if (
         "error-corrected" not in storage_main_data
         or "rounded" not in storage_main_data
